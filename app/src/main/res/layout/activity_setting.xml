@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="fill_horizontal">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="当前设备IP: "
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:text=""
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textview_localip"/>
+        </LinearLayout>
+
+        <View android:layout_width="fill_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:background="@color/colorViewLine"/>
+
+        <!--血统系统配置-->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="血透系统IP"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="服务器IP地址"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_ip"
+                        android:inputType="number"
+                        android:digits="0123456789."/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="端口"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="服务器端口号"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_port"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="项目名"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="项目名"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_xtname"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="fill_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:background="@color/colorViewLine"/>
+
+        <!--悬浮窗配置-->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal|center_vertical">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+                <TextView
+                        android:text="开机启动"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <CheckBox
+                        android:text="是"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/checkBox_powerup"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="20dp"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+                <TextView
+                        android:text="悬浮窗"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <CheckBox
+                        android:text="全   屏"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_fillscr"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="20dp"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="透明度"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="数值：0--0.95"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:digits="0123456789."
+                        android:textSize="20sp"
+                        android:id="@+id/editText_alpha"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal|center">
+
+                <TextView
+                        android:text="高度"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="悬浮窗高度"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_height"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="宽度"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="悬浮窗宽度"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_width"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="fill_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:background="@color/colorViewLine"/>
+
+        <!--床位图配置-->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+
+                <TextView
+                        android:text="床位图Url"
+                        android:textSize="20sp"
+                        android:ems="5"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="请求Url地址"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:id="@+id/editText_bedurl"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="fill_horizontal">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--按鈕-->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp">
+
+            <Button
+                    android:text="返回"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:textColor="@color/colorBtntext"
+                    style="@style/Widget.AppCompat.Button"
+                    android:textSize="20sp"
+                    android:id="@+id/btn_back"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:layout_margin="20dp"/>
+
+            <Button
+                    android:text="保存"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:textColor="@color/colorBtntext"
+                    style="@style/Widget.AppCompat.Button"
+                    android:textSize="20sp"
+                    android:id="@+id/btn_save"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:layout_margin="20dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

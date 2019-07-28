@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/toast_custom_parent"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:background="@drawable/toast_bg">
+
+    <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <TextView
+                android:text="姓名"
+                android:id="@+id/tv_patientname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:textSize="100dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="#000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+        <TextView
+                android:text="性别"
+                android:id="@+id/tv_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="70dp"
+                android:textColor="#000000"/>
+
+        <TextView
+                android:text="时间带"
+                android:id="@+id/tv_timezone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="70dp"
+                android:textColor="#000000"/>
+
+        <TextView
+                android:text="床位区域"
+                android:id="@+id/tv_bedposition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="70dp"
+                android:textColor="#000000"/>
+    </LinearLayout>
+
+</LinearLayout>

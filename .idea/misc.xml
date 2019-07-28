@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://172.17.1.153/svn/xytx/02_%E9%A1%B9%E7%9B%AE%E5%BA%93/New%20GC-HOPE/src/branches" />
+                  <option value="https://172.17.1.153/svn/xytx/02_%E9%A1%B9%E7%9B%AE%E5%BA%93/New%20GC-HOPE/src/branches-lotus-parent" />
+                  <option value="https://172.17.1.153/svn/xytx/02_%E9%A1%B9%E7%9B%AE%E5%BA%93/New%20GC-HOPE/src/hospital-old" />
+                  <option value="https://172.17.1.153/svn/xytx/02_%E9%A1%B9%E7%9B%AE%E5%BA%93/New%20GC-HOPE/src/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://172.17.1.153/svn/xytx/02_项目库/New GC-HOPE/src/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

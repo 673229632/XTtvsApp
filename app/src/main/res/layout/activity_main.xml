@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/login_bg">
+
+    <LinearLayout
+            android:id="@+id/line_tv"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp">
+
+        <TextView
+                android:id="@+id/title_v"
+                android:text="模式选择"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorText"
+                android:textSize="30sp"
+                android:focusable="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line_tv">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+            <Button
+                    android:text="浏览器模式"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:id="@+id/btn_browser"
+                    android:background="@drawable/shape"
+                    style="@style/Widget.AppCompat.Button"
+                    android:textSize="30sp"
+                    android:textColor="@color/colorBtntext"
+                    android:layout_margin="20dp"
+                    android:focusable="true"
+                    android:nextFocusUp="@id/btn_setting"
+                    android:nextFocusDown="@id/btn_bedpic"
+                    android:nextFocusLeft="@id/btn_setting"
+                    android:nextFocusRight="@id/btn_floatingwindow"/>
+
+            <Button
+                    android:text="悬浮窗模式"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/btn_floatingwindow"
+                    android:background="@drawable/shape"
+                    android:textColor="@color/colorBtntext"
+                    style="@style/Widget.AppCompat.Button"
+                    android:textSize="30sp"
+                    android:focusable="true"
+                    android:nextFocusUp="@id/btn_browser"
+                    android:nextFocusDown="@id/btn_bedpic"
+                    android:nextFocusLeft="@id/btn_browser"
+                    android:nextFocusRight="@id/btn_bedpic"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+            <Button
+                    android:text="床位图"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/btn_bedpic"
+                    android:background="@drawable/shape"
+                    android:textColor="@color/colorBtntext"
+                    style="@style/Widget.AppCompat.Button"
+                    android:textSize="30sp"
+                    android:focusable="true"
+                    android:nextFocusUp="@id/btn_browser"
+                    android:nextFocusDown="@id/btn_setting"
+                    android:nextFocusLeft="@id/btn_floatingwindow"
+                    android:nextFocusRight="@id/btn_setting"/>
+
+            <Button
+                    android:text="语音播报"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/btn_videoview"
+                    android:background="@drawable/shape"
+                    android:textColor="@color/colorBtntext"
+                    style="@style/Widget.AppCompat.Button"
+                    android:visibility="invisible"
+                    android:textSize="30sp"
+                    android:focusable="true"
+                    android:nextFocusUp="@id/btn_floatingwindow"
+                    android:nextFocusDown="@id/btn_setting"
+                    android:nextFocusLeft="@id/btn_bedpic"
+                    android:nextFocusRight="@id/btn_setting"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="12dp">
+
+        <Button
+                android:text="设置"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="bottom"
+                android:id="@+id/btn_setting"
+                android:background="@drawable/shape"
+                android:textColor="@color/colorBtntext"
+                style="@style/Widget.AppCompat.Button"
+                android:textSize="30sp"
+                android:focusable="true"
+                android:nextFocusUp="@id/btn_bedpic"
+                android:nextFocusDown="@id/btn_browser"
+                android:nextFocusLeft="@id/btn_bedpic"
+                android:nextFocusRight="@id/btn_browser"/>
+    </LinearLayout>
+
+</RelativeLayout>

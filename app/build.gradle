@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+//定义时间
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("UTC"))
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
+}
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.gcsoft.xttvsapp"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.31"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            variant.mergedFlavor.versionName = getVersionName() + "_" + releaseTime()
+            if (variant.buildType.name.equals('release')) {
+                outputFileName = "XTtvsApp_${variant.mergedFlavor.versionName}_release.apk"
+            } else if (variant.buildType.name.equals('debug')) {
+                outputFileName = "XTtvsApp_${variant.mergedFlavor.versionName}_debug.apk"
+            }
+            if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                variant.getPackageApplication().outputDirectory = new File("D:\\APK")
+                variant.getPackageApplication().outputScope.apkDatas.forEach {
+                    apkData -> apkData.outputFileName = outputFileName
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation(
+            'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:design:26.1.0'
+}

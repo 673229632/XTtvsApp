@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.gcsoft.xttvsapp">
+    <!-- 允许应用程序改变网络状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/> <!-- 允许应用程序改变WIFI连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/> <!-- 允许应用程序访问有关的网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!-- 允许应用程序访问WIFI网卡的网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> <!-- 允许应用程序完全使用网络 -->
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- 显示顶层浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+            android:name=".utils.MyApplication"
+            android:allowBackup="true"
+            android:hardwareAccelerated="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:persistent="true"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/MyAppTheme">
+        <activity android:name=".activity.TextToSpeechActivity">
+        </activity>
+        <activity
+                android:name=".activity.MainActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".activity.WebViewActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor">
+        </activity>
+        <activity
+                android:name=".activity.SettingActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor">
+        </activity>
+        <activity
+                android:name=".activity.BedPictureActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor">
+        </activity>
+
+        <service
+                android:name=".service.MyService"
+                android:enabled="true"
+                android:exported="true">
+        </service>
+
+        <activity android:name=".activity.VideoViewActivity">
+        </activity> <!-- 随着安卓系统启动而启动 -->
+        <receiver android:name=".broad.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
