@@ -1,0 +1,187 @@
+package com.ustcsoft.lotus.web.socket.service.impl;
+
+import com.alibaba.fastjson.JSON;
+import com.ustcsoft.lotus.core.autogen.dao.DRecordMapper;
+import com.ustcsoft.lotus.core.autogen.dao.MDilyMachBedMapper;
+import com.ustcsoft.lotus.core.autogen.dao.MDilyMachDtMapper;
+import com.ustcsoft.lotus.core.autogen.entity.*;
+import com.ustcsoft.lotus.web.common.util.DateUtil;
+import com.ustcsoft.lotus.web.common.util.Tools;
+import com.ustcsoft.lotus.web.socket.form.InstructionContants;
+import com.ustcsoft.lotus.web.socket.form.SocketSendInfoForm;
+import com.ustcsoft.lotus.web.socket.service.SocketService;
+import com.ustcsoft.marsfw.spring.config.PropertyUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/***
+ *  .--,       .--,
+ * ( (  \.---./  ) )
+ *  '.__/o   o\__.'
+ *     {=  ^  =}
+ *      >  -  <
+ *     /       \
+ *    //       \\
+ *   //|   .   |\\
+ *   "'\       /'"_.-~^`'-.
+ *      \  _  /--'         `
+ *    ___)( )(___
+ *   (((__) (__)))    高山仰止,景行行止.虽不能至,心向往之。
+ * -----------------------------------------------------
+ * @author zhangrui.i
+ * @since 2019年3月28日 下午5:12:01
+ */
+@Service
+public class SocketServiceImpl implements SocketService {
+
+    @Autowired
+    private DRecordMapper dRecordMapper;
+
+    @Autowired
+    private MDilyMachBedMapper dilyMachBedMapper;
+
+    @Autowired
+    private MDilyMachDtMapper dilyMachDtMapper;
+
+    /**
+     * 发送显示指令.
+     *
+     * @param ids           String
+     * @param timezoneCodes String
+     * @param dialydate     String
+     */
+    @Override
+    public void sendInstructionToTv(String ids, String timezoneCodes, String dialydate) {
+
+        final List<String> codes = new ArrayList<>();
+
+        DRecordExample dRecordexample = new DRecordExample();
+        DRecordExample.Criteria dRecordcriteria = dRecordexample.createCriteria();
+        dRecordcriteria.andPatientidIn(Arrays.asList(ids.split("、")));
+        dRecordcriteria.andDialydateEqualTo(DateUtil.convertStringToDateTime7(dialydate));
+        dRecordcriteria.andTimezonecodeIn(Arrays.asList(timezoneCodes.split("、")));
+        dRecordcriteria.andDeleteflagEqualTo("0");
+        List<DRecord> dRecordCheck = dRecordMapper.selectByExample(dRecordexample);
+
+        // 遍历获取床位
+        for (DRecord dRecord : dRecordCheck) {
+            codes.add(dRecord.getBednum());
+        }
+
+        MDilyMachBedExample mBedExample = new MDilyMachBedExample();
+        MDilyMachBedExample.Criteria mBedCriteria = mBedExample.createCriteria();
+        mBedCriteria.andDeleteflagEqualTo("0");
+        //bug 11300 2019.04.24 liupengfei add start 基本版，预检页面，点击预检结果确认页面报错
+        if (Tools.listisblank(codes)) {
+            codes.add("");
+        }
+        //bug 11300 2019.04.24 liupengfei add end
+        mBedCriteria.andBedcodeIn(codes);
+        List<MDilyMachBed> mbedList = dilyMachBedMapper.selectByExample(mBedExample);
+
+        // 遍历获取透析机
+        codes.clear();
+        for (MDilyMachBed machBed : mbedList) {
+            codes.add(machBed.getCode());
+        }
+
+        MDilyMachDtExample machExample = new MDilyMachDtExample();
+        MDilyMachDtExample.Criteria machCriteria = machExample.createCriteria();
+        machCriteria.andDeleteflagEqualTo("0");
+        //bug 11300 2019.04.24 liupengfei add start 基本版，预检页面，点击预检结果确认页面报错
+        if (Tools.listisblank(codes)) {
+            codes.add("");
+        }
+        //bug 11300 2019.04.24 liupengfei add end
+        machCriteria.andMachinecodeIn(codes);
+        List<MDilyMachDt> machList = dilyMachDtMapper.selectByExample(machExample);
+
+        // 遍历获取padip
+        codes.clear();
+        for (MDilyMachDt mBedTv : machList) {
+            codes.add(mBedTv.getIpaddresspad());
+        }
+
+        SocketSendInfoForm socketSendInfoForm = new SocketSendInfoForm();
+        socketSendInfoForm.setTypeXtUrl("dialysispatienttv");
+        socketSendInfoForm.setTypeInstruction(InstructionContants.IS_SHOW_KEY);
+        socketSendInfoForm.setShowTimeLength(PropertyUtil.getPropertyInt("XTtvsAppShowTime", 30));
+
+        sendInfoToApp(codes, socketSendInfoForm);
+    }
+
+    /**
+     * UDP实现发送信息方式.
+     *
+     * @param codes              List
+     * @param socketSendInfoForm SocketSendInfoForm
+     * @return List
+     */
+    @Override
+    public List<String> sendInfoToApp(final List<String> codes, SocketSendInfoForm socketSendInfoForm) {
+
+        List<String> result = new ArrayList<>();
+        DatagramSocket datagramSocket = null;
+        try {
+            // 通过DatagramSocket对象创建udp服务
+            datagramSocket = new DatagramSocket();
+
+            for (String code : codes) {
+                // code 的数据结构为 ip|label
+                String[] ip_label = code.split("\\|");
+
+                socketSendInfoForm.setClientIpAddress(ip_label[0]);
+
+                String data = JSON.toJSONString(socketSendInfoForm);
+                data = new String(data.getBytes(), "gbk");
+                System.out.println(data);
+
+                // 确定好数据后，并把数据封装成数据包
+                byte[] buf = data.getBytes();
+                // 发送至指定IP，指定端口
+                DatagramPacket dp = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip_label[0]), 30000);
+                // 通过send方法将数据包发送出去
+                datagramSocket.send(dp);
+
+                DatagramPacket recePacket = null;
+                String receStr = "";
+                try {
+                    // 接收数据
+                    byte[] receBuf = new byte[1024];
+                    recePacket = new DatagramPacket(receBuf, receBuf.length);
+                    datagramSocket.setSoTimeout(1000);
+                    datagramSocket.receive(recePacket);
+
+                    receStr = new String(recePacket.getData(), 0, recePacket.getLength(), "gbk");
+                    if (ip_label.length == 2) {
+                        result.add(ip_label[1] + "-->" + ("success".equals(receStr) ? "发送成功" : receStr));
+                    } else {
+                        result.add(ip_label[0] + "-->" + ("success".equals(receStr) ? "发送成功" : receStr));
+                    }
+                } catch (Exception e) {
+                    if (ip_label.length == 2) {
+                        result.add(ip_label[1] + "-->" + "发送失败");
+                    } else {
+                        result.add(ip_label[0] + "-->" + "发送失败");
+                    }
+                    continue;
+                }
+            }
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        } finally {
+            // 关闭资源
+            if (datagramSocket != null) {
+                datagramSocket.close();
+            }
+            return result;
+        }
+    }
+}
